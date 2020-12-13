@@ -205,8 +205,7 @@ function getRectangleString(width, height) {
   const lineBreakChar = '\n';
   const space = ' ';
   const firstLine = `┌${widthChar.repeat(width - 2)}┐${lineBreakChar}`;
-  const middleLine =
-    heightChar + space.repeat(width - 2) + heightChar + lineBreakChar;
+  const middleLine = heightChar + space.repeat(width - 2) + heightChar + lineBreakChar;
   const lastLine = `└${widthChar.repeat(width - 2)}┘${lineBreakChar}`;
   return firstLine + middleLine.repeat(height - 2) + lastLine;
 }
