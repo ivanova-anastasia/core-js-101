@@ -36,9 +36,7 @@ function findElement(arr, value) {
  */
 function generateOdds(len) {
   const newArr = new Array(len).fill(1);
-  const resultArr = newArr.map((value, index) => {
-    return (index + 1) * 2 - 1;
-  });
+  const resultArr = newArr.map((value, index) => (index + 1) * 2 - 1);
   return resultArr;
 }
 
@@ -200,11 +198,12 @@ function getTail(arr, n) {
  */
 function toCsvText(arr) {
   const result = arr.reduce((newVal, current, index, array) => {
-    newVal += current.join(',');
+    let tempValue = newVal;
+    tempValue += current.join(',');
     if (index !== array.length - 1) {
-      newVal += '\n';
+      tempValue += '\n';
     }
-    return newVal;
+    return tempValue;
   }, '');
   return result;
 }
@@ -239,11 +238,9 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-  return arr.map((item, index, array) => {
-    return array
-      .slice(0, index + 1)
-      .reduce((accumulator, value) => accumulator + value);
-  });
+  return arr.map((item, index, array) => array
+    .slice(0, index + 1)
+    .reduce((accumulator, value) => accumulator + value));
 }
 
 /**
@@ -316,7 +313,7 @@ function get3TopItems(arr) {
 function getPositivesCount(arr) {
   const result = arr.reduce((counter, value) => {
     if (typeof value === 'string') return counter;
-    return value > 0 ? ++counter : counter;
+    return value > 0 ? counter + 1 : counter;
   }, 0);
   return result;
 }
@@ -347,12 +344,10 @@ function sortDigitNamesByNumericOrder(arr) {
     'eight',
     'nine',
   ];
-  const resultArr = arr.sort((a, b) => {
-    return (
-      strNum.findIndex((value) => value === a) -
-      strNum.findIndex((value) => value === b)
-    );
-  });
+  const resultArr = arr.sort(
+    (a, b) => strNum.findIndex((value) => value === a)
+      - strNum.findIndex((value) => value === b),
+  );
   return resultArr;
 }
 
@@ -387,9 +382,10 @@ function getItemsSum(arr) {
  */
 function getFalsyValuesCount(arr) {
   if (arr.length === 0) return 0;
-  const result = arr.reduce((accumulator, value) => {
-    return value ? accumulator : ++accumulator;
-  }, 0);
+  const result = arr.reduce(
+    (accumulator, value) => (value ? accumulator : accumulator + 1),
+    0,
+  );
   return result;
 }
 
@@ -556,12 +552,12 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-  let setKeys = [...new Set(array.map((item) => keySelector(item)))];
+  const setKeys = [...new Set(array.map((item) => keySelector(item)))];
 
-  let result = setKeys.reduce((accumulator, item) => {
+  const result = setKeys.reduce((accumulator, item) => {
     const subArray = array
       .filter((itemFirst) => keySelector(itemFirst) === item)
-      .map((item) => valueSelector(item));
+      .map((sutItem) => valueSelector(sutItem));
     accumulator.set(item, subArray);
     return accumulator;
   }, new Map());
@@ -582,7 +578,7 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-  let result = arr.map((item) => childrenSelector(item));
+  const result = arr.map((item) => childrenSelector(item));
   return result.flat();
 }
 
@@ -599,9 +595,10 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-  const result = indexes.reduce((accumulator, current) => {
-    return accumulator[current];
-  }, arr);
+  const result = indexes.reduce(
+    (accumulator, current) => accumulator[current],
+    arr,
+  );
   return result;
 }
 
@@ -627,8 +624,7 @@ function swapHeadAndTail(arr) {
   if (arr.length < 2) return arr;
   const head = arr.slice(0, Math.floor(arr.length / 2));
   const tail = arr.slice(Math.round(arr.length / 2));
-  const middleItem =
-    arr.length % 2 === 0 ? [] : [arr[Math.floor(arr.length / 2)]];
+  const middleItem = arr.length % 2 === 0 ? [] : [arr[Math.floor(arr.length / 2)]];
   return [...tail, ...middleItem, ...head];
 }
 
