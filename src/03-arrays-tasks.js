@@ -1,9 +1,9 @@
 /* ********************************************************************************************
  *                                                                                            *
- * Please read the following tutorial before implementing tasks:                               *
+ * Plese read the following tutorial before implementing tasks:                               *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array     *
  *                                                                                            *
- * NOTE : Please do not use loops! All tasks can be implemented using standard Array methods  *
+ * NOTE : Please do not use loops! All tasks can be implmeneted using standard Array methods  *
  *                                                                                            *
  ******************************************************************************************** */
 
@@ -238,9 +238,11 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-  return arr.map((item, index, array) => array
-    .slice(0, index + 1)
-    .reduce((accumulator, value) => accumulator + value));
+  return arr.map((item, index, array) =>
+    array
+      .slice(0, index + 1)
+      .reduce((accumulator, value) => accumulator + value)
+  );
 }
 
 /**
@@ -345,8 +347,9 @@ function sortDigitNamesByNumericOrder(arr) {
     'nine',
   ];
   const resultArr = arr.sort(
-    (a, b) => strNum.findIndex((value) => value === a)
-      - strNum.findIndex((value) => value === b),
+    (a, b) =>
+      strNum.findIndex((value) => value === a) -
+      strNum.findIndex((value) => value === b)
   );
   return resultArr;
 }
@@ -384,7 +387,7 @@ function getFalsyValuesCount(arr) {
   if (arr.length === 0) return 0;
   const result = arr.reduce(
     (accumulator, value) => (value ? accumulator : accumulator + 1),
-    0,
+    0
   );
   return result;
 }
@@ -597,7 +600,7 @@ function selectMany(arr, childrenSelector) {
 function getElementByIndexes(arr, indexes) {
   const result = indexes.reduce(
     (accumulator, current) => accumulator[current],
-    arr,
+    arr
   );
   return result;
 }
@@ -624,7 +627,8 @@ function swapHeadAndTail(arr) {
   if (arr.length < 2) return arr;
   const head = arr.slice(0, Math.floor(arr.length / 2));
   const tail = arr.slice(Math.round(arr.length / 2));
-  const middleItem = arr.length % 2 === 0 ? [] : [arr[Math.floor(arr.length / 2)]];
+  const middleItem =
+    arr.length % 2 === 0 ? [] : [arr[Math.floor(arr.length / 2)]];
   return [...tail, ...middleItem, ...head];
 }
 
